@@ -1,17 +1,34 @@
 <?php
-error_reporting(0);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
-$_SESSION = array();
-if (ini_get("session.use_cookies")) {
+
+$_SESSION = [];
+
+if (ini_get('session.use_cookies')) {
     $params = session_get_cookie_params();
-    setcookie(session_name(), '', time() - 42000,
-        $params["path"], $params["domain"],
-        $params["secure"], $params["httponly"]
+    
+    setcookie(
+        session_name(),
+        '',
+        time() - 42000,
+        $params['path'],
+        $params['domain'],
+        $params['secure'],
+        $params['httponly']
     );
 }
+
 session_destroy();
-setcookie('user_id', '', time() - 3600, '/');
-setcookie('username', '', time() - 3600, '/');
+
+$cookies = ['user_id', 'username'];
+
+foreach ($cookies as $cookie) {
+    if (isset($_COOKIE[$cookie])) {
+        setcookie($cookie, '', time() - 3600, '/');
+    }
+}
+
 header('Location: index.php');
 exit();
-?>
