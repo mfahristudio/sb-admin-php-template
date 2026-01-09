@@ -1,8 +1,8 @@
 <?php
-$db_host = 'localhost';
-$db_name = 'fahriwebdesign';
-$db_user = 'root';
-$db_pass = '';
+$db_host = 'host';
+$db_name = 'db_name';
+$db_user = 'db_username';
+$db_pass = 'db_password';
 
 try {
     $dsn = "mysql:host={$db_host};dbname={$db_name};charset=utf8mb4";
@@ -18,3 +18,4 @@ try {
     http_response_code(500);
     exit('Database connection error. Please try again later.');
 }
+
